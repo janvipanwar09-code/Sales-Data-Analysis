@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Data Analysis Dashboard</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            color: #1f2937;
+        }
+
+        header {
+            background: linear-gradient(135deg, #111827, #2563eb);
+            color: white;
+            padding: 35px 7%;
+        }
+
+        header h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            opacity: 0.85;
+        }
+
+        .container {
+            width: 86%;
+            margin: 30px auto;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+        }
+
+        .card h3 {
+            color: #6b7280;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        .charts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .chart-box {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+        }
+
+        .chart-box h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .full {
+            margin-top: 25px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #6b7280;
+        }
+
+        @media (max-width: 900px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .charts {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                width: 92%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>📊 Sales Data Analysis</h1>
+    <p>Interactive dashboard for analyzing sales, products, categories and monthly trends.</p>
+</header>
+
+<div class="container">
+
+    <div class="cards">
+        <div class="card">
+            <h3>Total Sales</h3>
+            <p>₹6,60,000</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Orders</h3>
+            <p>15</p>
+        </div>
+
+        <div class="card">
+            <h3>Top Product</h3>
+            <p>Laptop</p>
+        </div>
+
+        <div class="card">
+            <h3>Top Category</h3>
+            <p>Electronics</p>
+        </div>
+    </div>
+
+    <div class="charts">
+
+        <div class="chart-box">
+            <h2>Sales by Product</h2>
+            <canvas id="productChart"></canvas>
+        </div>
+
+        <div class="chart-box">
+            <h2>Sales by Category</h2>
+            <canvas id="categoryChart"></canvas>
+        </div>
+
+    </div>
+
+    <div class="chart-box full">
+        <h2>Monthly Sales Trend</h2>
+        <canvas id="monthlyChart"></canvas>
+    </div>
+
+</div>
+
+<footer>
+    <p>Sales Data Analysis | Python • Pandas • NumPy • SQL • Matplotlib</p>
+    <p>Created by Janvi Panwar</p>
+</footer>
+
+<script>
+
+const productData = {
+    labels: [
+        "Laptop",
+        "Monitor",
+        "Keyboard",
+        "Mouse",
+        "Headphones"
+    ],
+    datasets: [{
+        label: "Sales (₹)",
+        data: [
+            440000,
+            108000,
+            36000,
+            36000,
+            40000
+        ]
+    }]
+};
+
+new Chart(
+    document.getElementById("productChart"),
+    {
+        type: "bar",
+        data: productData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    }
+);
+
+
+const categoryData = {
+    labels: [
+        "Electronics",
+        "Accessories"
+    ],
+    datasets: [{
+        label: "Sales (₹)",
+        data: [
+            588000,
+            72000
+        ]
+    }]
+};
+
+new Chart(
+    document.getElementById("categoryChart"),
+    {
+        type: "doughnut",
+        data: categoryData,
+        options: {
+            responsive: true
+        }
+    }
+);
+
+
+const monthlyData = {
+    labels: [
+        "January",
+        "February",
+        "March"
+    ],
+    datasets: [{
+        label: "Monthly Sales (₹)",
+        data: [
+            218000,
+            201000,
+            241000
+        ],
+        fill: false,
+        tension: 0.3
+    }]
+};
+
+new Chart(
+    document.getElementById("monthlyChart"),
+    {
+        type: "line",
+        data: monthlyData,
+        options: {
+            responsive: true
+        }
+    }
+);
+
+</script>
+
+</body>
+</html>
